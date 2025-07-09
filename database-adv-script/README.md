@@ -8,8 +8,19 @@ This task focuses on mastering SQL joins by writing queries that combine data fr
 1. **INNER JOIN Query**  
    Retrieves all bookings and the users who made those bookings by matching `bookings.user_id` with `users.user_id`. Only bookings that have a matching user are included.
 
-2. **LEFT JOIN Query**  
-   Retrieves all properties and their reviews. This includes properties even if they have no reviews, thanks to the LEFT JOIN which keeps all properties and matches reviews where available.
+2. **LEFT JOIN**
+SELECT
+    properties.property_id,
+    properties.property_name,
+    reviews.review_id,
+    reviews.rating,
+    reviews.comment
+FROM
+    properties
+LEFT JOIN
+    reviews ON properties.property_id = reviews.property_id
+ORDER BY
+    properties.property_id;
 
 3. **FULL OUTER JOIN Query**  
    Retrieves all users and all bookings, including users with no bookings and bookings that are not linked to any user. This is done with a FULL OUTER JOIN which combines all rows from both tables.
