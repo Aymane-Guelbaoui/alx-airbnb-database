@@ -1,34 +1,19 @@
-# ALX Airbnb Database Module - Task 0: Write Complex Queries with Joins
+# ALX Airbnb Database Module - Task 1: Practice Subqueries
 
 ## Objective
-This task focuses on mastering SQL joins by writing queries that combine data from multiple tables using INNER JOIN, LEFT JOIN, and FULL OUTER JOIN.
+This task focuses on writing both correlated and non-correlated subqueries for data retrieval.
 
 ## Queries Explanation
 
-1. **INNER JOIN Query**  
-   Retrieves all bookings and the users who made those bookings by matching `bookings.user_id` with `users.user_id`. Only bookings that have a matching user are included.
+1. **Non-correlated Subquery**  
+   Retrieves all properties where the average rating (calculated from the `reviews` table) is greater than 4.0. The subquery calculates average ratings per property and filters accordingly.
 
-2. **LEFT JOIN**
-SELECT
-    properties.property_id,
-    properties.property_name,
-    reviews.review_id,
-    reviews.rating,
-    reviews.comment
-FROM
-    properties
-LEFT JOIN
-    reviews ON properties.property_id = reviews.property_id
-ORDER BY
-    properties.property_id;
-
-3. **FULL OUTER JOIN Query**  
-   Retrieves all users and all bookings, including users with no bookings and bookings that are not linked to any user. This is done with a FULL OUTER JOIN which combines all rows from both tables.
+2. **Correlated Subquery**  
+   Finds users who have made more than 3 bookings. The subquery counts bookings for each user by correlating with the outer query using the user's `user_id`.
 
 ## File Location
 
-- SQL queries are saved in `database-adv-script/joins_queries.sql`.
+- SQL queries are saved in `database-adv-script/subqueries.sql`.
 - This README file is located in the root directory for reference.
 
 ---
-
