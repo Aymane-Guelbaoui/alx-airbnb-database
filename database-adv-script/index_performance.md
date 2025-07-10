@@ -1,26 +1,17 @@
--- Before indexing: measure performance
-EXPLAIN ANALYZE
-SELECT
-    u.username,
-    b.booking_date
-FROM
-    users u
-JOIN bookings b ON u.user_id = b.user_id
-WHERE
-    b.booking_date >= '2024-01-01';
+# Index Performance Report
 
--- Create indexes
-CREATE INDEX idx_bookings_user_id ON bookings(user_id);
-CREATE INDEX idx_bookings_property_id ON bookings(property_id);
-CREATE INDEX idx_reviews_property_id ON reviews(property_id);
+## Indexes Created
 
--- After indexing: measure performance again
-EXPLAIN ANALYZE
-SELECT
-    u.username,
-    b.booking_date
-FROM
-    users u
-JOIN bookings b ON u.user_id = b.user_id
-WHERE
-    b.booking_date >= '2024-01-01';
+- `bookings.user_id`  
+- `bookings.property_id`  
+- `reviews.property_id`  
+
+These columns are frequently used in JOINs and WHERE filters.
+
+## Performance Analysis
+
+Before indexing, the query performed a full scan on bookings with slow execution time. After creating the indexes, the query planner used index scans, resulting in significantly faster query performance and reduced I/O.
+
+## Conclusion
+
+Creating indexes on frequently used columns improved query execution time and resource usage. Using `EXPLAIN ANALYZE` validated these performance improvements.
