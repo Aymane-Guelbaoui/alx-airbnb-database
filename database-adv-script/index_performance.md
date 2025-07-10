@@ -1,18 +1,21 @@
 # Index Performance Analysis
 
-## Indexes Implemented
+## Objective
+To improve the performance of frequently used queries by creating indexes on high-usage columns and analyzing their impact using `EXPLAIN ANALYZE`.
 
-- `bookings.user_id`
-- `bookings.property_id`
-- `reviews.property_id`
+---
 
-## Performance Measurement
+## Step 1: Baseline Performance (Before Indexing)
 
-### Before Indexing
-Using `EXPLAIN`, the query used full table scans and was slow for large data.
+We ran the following query to join `users` and `bookings` and filter bookings by date:
 
-### After Indexing
-`EXPLAIN` shows index usage, resulting in reduced query cost and faster execution time.
-
-### Conclusion
-Indexes significantly improved read performance on joined and filtered columns.
+```sql
+EXPLAIN ANALYZE
+SELECT
+    u.username,
+    b.booking_date
+FROM
+    users u
+JOIN bookings b ON u.user_id = b.user_id
+WHERE
+    b.booking_date >= '2024-01-01';
